@@ -11,14 +11,15 @@ fs.readFile('input.txt', 'utf8', (err, data) => {
         return;
     }
     console.log("data is heere");
-    console.log(calibrateCharsAndDigits("7beighttwob"));
-    console.log(testInput(data));
+    console.log(calibrateCharsAndDigits("onebeighttwob"));
+    //console.log(testInput(data));
+    console.log("---------------");
+    console.log(blabber("onea"));
 });
 
 
 function testInput(data) {
     const input_array = data.split("\n");
-    //console.log( calibrateCharsAndDigits(input_array[1]));
     let sum = 0;
     for (const line of input_array) {
         if (line.length > 0) {
@@ -26,6 +27,84 @@ function testInput(data) {
         }
     }
     return sum;
+}
+
+const numbers = ["one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "zero"]
+
+function blabber(input) {
+    let index = 0;
+    let nums = [];
+    let value = "";
+    for (const num of numbers) {
+        if (input[0] === num[index]) {
+            nums.push(num)
+            value += input[0];
+        }
+    }
+    index++;
+    console.log(nums);
+    if (nums.length == 0) {
+        return "";
+    }
+    for (const inp of input.substring(1)) {
+        let nums_cache = [];
+        for (const num of nums) {
+            if (num.length-1 > index && inp === num[index]) {
+                nums_cache.push(num)
+                value += inp;
+            }
+        }
+        console.log("nums ", nums);
+        console.log("num cache", nums_cache)
+        if (numbers.includes(value)) {
+            return value;
+        }
+        if (nums_cache.length == 0) {
+            console.log("empt")
+            return "";
+        } else {
+            nums = nums_cache;
+            index++;
+        }
+    }
+    if (numbers.includes(input)) {
+        return input;
+    } else {
+        return "";
+    }
+}
+
+function digitFromString(input) {
+    if (input == "one") {
+        return 1;
+    }
+    if (input == "two") {
+        return 2;
+    }
+    if (input == "three") {
+        return 3;
+    }
+    if (input == "four") {
+        return 4;
+    }
+    if (input == "five") {
+        return 5;
+    }
+    if (input == "six") {
+        return 6;
+    }
+    if (input == "seven") {
+        return 7;
+    }
+    if (input == "eight") {
+        return 8;
+    }
+    if (input == "nine") {
+        return 9;
+    }
+    if (input == "zero") {
+        return 0;
+    }
 }
 
 function calibrateCharsAndDigits(line) {
@@ -37,6 +116,11 @@ function calibrateCharsAndDigits(line) {
         if (!isNaN(parseInt(begin))) {
             first = parseInt(begin);
         } else {
+            let num = blabber(line.substr(begin));
+            console.log(num)
+            if (num != "") {
+                first = digitFromString(num);
+            } 
         }
         if (!isNaN(parseInt(end))) {
              last = parseInt(end);
