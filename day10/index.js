@@ -11,13 +11,10 @@ fs.readFile("real.txt", "utf8", (err, data) => {
         }
     }
 
-    findPath(input, x, y);
+    const result = nonRecursivePath(input, x, y, 0, -1)
+    console.log(result.length);
 });
 
-function findPath(map, x, y) {
-    const result = nonRecursivePath(map, x, y, 0, -1)
-    console.log(result.length);
-}
 
 
 function nonRecursivePath(map, x, y, dirx, diry) {
