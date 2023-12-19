@@ -59,7 +59,7 @@ function hasAdjacentSymbols(input, x, y) {
     if (y != 0 && chechCell(input, x, y-1, false)) {
         return true;
     }
-    if (y < input.length-2 && chechCell(input, x, y+1, false)) {
+    if (y < input.length-1 && chechCell(input, x, y+1, false)) {
         return true;
     }
     // check for diagonal
@@ -77,6 +77,7 @@ function hasAdjacentSymbols(input, x, y) {
     }
 }
 
+// should be checkCell XD
 function chechCell(input, x, y, ignoreMinus) {
     //console.log("check: ", x, y)
     //console.log("char: ", input[y][x])
